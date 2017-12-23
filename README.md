@@ -61,3 +61,63 @@
   + 方式2： 使用路由的`props`属性来传递参数：
      - 改造路由规则，在对应的规则中，添加 `props: true` 的属性
      - 在 组件中，定义`props: []` ，数组中定义的 名称，就是 路由规则中，对应参数的名称占位符（要保持一致）
+
+## 渲染新闻详情页面
+1. 获取数据
+2. 挂载数据到 data 上
+3. 渲染页面
+
+## 评论子组件的封装和引用
+1. 在 项目的 创建`src -> sub-components` 目录；
+2. 创建一个标准的vue组件，命名为 `Comment.vue`， 作为我们的评论子组件
+3. 哪个页面需要引用这个评论组件了，就在页面的 script 节点中，通过  import 的形式，导入此组件
+4. 在 页面的 script 中，通过 `components`属性注册导入的评论组件
+5. 把注册的组件名称，以标签形式，引入到页面上，就能够看到这个评论子组件了；
+
+## 绘制评论子组件的结构
+
+## 获取评论内容
+1. 前提： 在评论组件中，需要获取到新闻的id;
+2. 通过 属性传递的形式，父组件为子组件传递新闻的Id；
+3. 定义根据新闻Id和页码，获取评论数据的方法，并在 `created` 钩子中，调用此方法，获取数据；
+4. 把获取到的数据，挂载到 data 上的 cmtlist 中；并渲染页面；
+
+## 点击加载更多的评论
+1. 为加载更多按钮，绑定点击事件；
+2. 在事件中，让 page 页码值 自增 + 1
+3. 当页码值+1之后，重新调用 获取 评论内容的方法；
+ + 如果重新调用获取更多评论内容的方法，刚获取到的那一页的数据， 会覆盖之前的评论数据；
+ + 为了防止上述的问题，我们在获取到评论数据之后，不应该直接 `this.cmtlist = data.message`，而是应该`this.cmtlist = this.cmtlist.concat(data.message)`
+
+ ## 实现发表评论的功能
+ 1. 在 点击发表评论按钮的时候，处理函数中，做一下非法值校验，防止评论内容为空！
+ 2. 如果校验通过，则调用API接口提交评论数据到后端；
+ 3. 当评论成功后，需要在客户端，组织出一个新的评论对象，手动 unshift 到 评论列表`cmtlist`中；
+
+
+ ## 改造图片分享的路由跳转
+ 1. 新建一个组件页面 
+ 2. 改造路由链接 `HomeContainer.vue`
+ 3. 添加一个路由规则 `router.js`
+
+ ## 实现图片分享列表中顶部的滑动区域
+ 1. 借助于 MUI 的 `tab-top-webview-main.html` 控件来实现
+ 2. 当拿到 UI 代码片段之后，需要把 `mui-fullscreen` 去掉
+ 3. 当页面布局没有大问题之后，发现无法实现滑动效果，此时，需要使用官方推荐的形式，去初始化一下控件,具体初始化的方式，参考官方文档:`http://dev.dcloud.net.cn/mui/ui/#scroll`
+ 
+
+## 当在项目中引入了MUI的JS文件报错的问题：
+> 报错信息：Uncaught TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
+1. 分析问题的原因：
+ + webpack 打包出来的  bundle.js 中，默认启用了严格模式
+ + 在项目中，import 导入的 mui.js 中，使用了 callee caller 这些特性， 但是这些特性在严格模式中不支持，会报错；
+ + 经过分析：发现，关闭webpack的严格模式，更容易一些，因为不再需要修改mui.js的源代码了；
+ + 如何关闭webpack的严格模式呢？使用一个webpack的插件：`https://github.com/genify/babel-plugin-transform-remove-strict-mode`
+
+
+## 当移除严格模式之后滑动效果还无法实现
+1. 主要原因：需要在`mounted`钩子函数中来初始化
+2. 因为，如果当前的 图片分享列表组件，还没有挂载到页面上，那么，调用`mui()` 方法 初始化组件是没有任何意义的；因为此时页面上没有任何的元素；
+
+## 如何移除滑动区域的警告问题
+1. 为 `mui-slider` 类样式，添加，`touch-action: pan-x;`属性样式，从而支持 此元素的 单指水平滑动效果，提高滑动的流畅度；
