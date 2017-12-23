@@ -6,6 +6,7 @@ import Search from './components/tabbars/Search.vue'
 import Shopcar from './components/tabbars/Shopcar.vue'
 import News from './components/news/News.vue'
 import NewsInfo from './components/news/NewsInfo.vue'
+import PhotoList from './components/photos/PhotoList.vue'
 
 const router = new VueRouter({
   routes: [
@@ -16,6 +17,7 @@ const router = new VueRouter({
     { path: '/search', component: Search },
     { path: '/home/news', component: News },
     { path: '/home/newsInfo/:id', component: NewsInfo, props:true },
+    { path: '/home/photolist',component:PhotoList }
     
     
   ],

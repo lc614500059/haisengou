@@ -1,9 +1,9 @@
 <template>
   <div>
       <h3>评论列表</h3>
-      <textarea placeholder="请输入要BB的内容（最多120字）" maxlength="120"></textarea>
+      <textarea placeholder="请输入要BB的内容（最多120字）" maxlength="120" v-model="msg"></textarea>
 
-      <mt-button type="primary" size="large">发表评论</mt-button>
+      <mt-button type="primary" size="large" @click="postMsg">发表评论</mt-button>
 
     <div class="cmt-list">
       <div class="cmt-item" v-for="(item,i) in comlist" :key="i">
@@ -17,11 +17,14 @@
 </template>
 
 <script>
+import { Toast } from "mint-ui";
+
 export default {
   data() {
     return {
       page: 1,
-      comlist: []
+      comlist: [],
+      msg: ""
     };
   },
   created() {
@@ -39,6 +42,26 @@ export default {
     getMore() {
       this.page++;
       this.getCommentByPage();
+    },
+    async postMsg() {
+      if (this.msg.trim().length <= 0) return Toast("请输入内容！");
+
+      const { data } = await this.$http.post(
+        "/api/postcomment/" + this.newsid,
+        {
+          content: this.msg.trim()
+        }
+      );
+      if (data.status === 0) {
+        console.log("ok");
+        this.comlist.unshift({
+          user_name: "匿名用户",
+          add_time: new Date(),
+          content: this.msg.trim()
+        });
+        this.msg ='';
+        // this.getCommentByPage();
+      }
     }
   },
   props: ["newsid"]
