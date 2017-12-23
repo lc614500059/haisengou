@@ -1,5 +1,5 @@
 <template>
-  <div><h3>新闻里表</h3></div>
+  <div><h3>新闻列表---{{ id }}</h3></div>
 </template>
 
 <script>
@@ -7,7 +7,11 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
+  created(){
+    console.log(this)
+  },
+  props:["id"]
 };
 </script>
 

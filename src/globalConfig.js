@@ -15,10 +15,6 @@ import '../lib/mui/css/icons-extra.css'
 //导入过滤器
 import './filters.js'
 
-//配置路由
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
 
 //配置axios
 import axios from 'axios'

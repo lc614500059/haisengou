@@ -4,6 +4,10 @@ import Vue from 'vue'
 
 import './globalConfig.js'
 
+//配置路由
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
 import router from './router.js'
 
 // 导入 根组件

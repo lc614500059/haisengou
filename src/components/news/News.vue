@@ -9,7 +9,7 @@
 							<h1>{{ item.title }}</h1>
 							<p class='mui-ellipsis'>
                 <span>发表时间：{{ item.add_time | dateFormat }}</span>
-                <span>{{ item.click }}</span>
+                <span>点击：{{ item.click }}次</span>
                 </p>
 						</div>
 					</router-link>

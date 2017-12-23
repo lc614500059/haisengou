@@ -51,13 +51,12 @@
 }
 .v-leave-to{
 	opacity: 0;
-	transform: translateX(-100%)
+	transform: translateX(-100%);
+	position: absolute;	
 }
 
 .v-enter-active,
 .v-leave-active{
-	opacity: 1;
 	transition: all 0.4s ease;
-	position: absolute;
 }
 </style>
