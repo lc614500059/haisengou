@@ -37,15 +37,6 @@ export default {
       width: 100%;
       height: 100%;
     }
-    &:nth-child(1) {
-      background-color: pink;
-    }
-    &:nth-child(2) {
-      background-color: hotpink;
-    }
-    &:nth-child(3) {
-      background-color: deeppink;
-    }
   }
 }
 </style>
