@@ -7,7 +7,9 @@
       </span>
    </mt-header>
 
-    <router-view></router-view>
+    <transition>
+		<router-view></router-view>
+		</transition>
 
     <nav class="mui-bar mui-bar-tab">
 			<router-link class="mui-tab-item" to="/home">
@@ -41,4 +43,19 @@
   padding-top: 40px;
 }
 
+.v-enter{
+	opacity: 0;
+	transform: translateX(100%)
+}
+.v-leave-to{
+	opacity: 0;
+	transform: translateX(-100%)
+}
+
+.v-enter-active,
+.v-leave-active{
+	opacity: 1;
+	transition: all 0.4s ease;
+	position: absolute;
+}
 </style>
