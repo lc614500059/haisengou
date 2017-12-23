@@ -4,6 +4,7 @@ import Home from './components/tabbars/Home.vue'
 import Member from './components/tabbars/Member.vue'
 import Search from './components/tabbars/Search.vue'
 import Shopcar from './components/tabbars/Shopcar.vue'
+import News from './components/news/News.vue'
 
 const router = new VueRouter({
   routes: [
@@ -12,7 +13,8 @@ const router = new VueRouter({
     { path: '/member', component: Member },
     { path: '/shopcar', component: Shopcar },
     { path: '/search', component: Search },
-
+    { path: '/home/news', component: News },
+    
   ],
   linkActiveClass: 'mui-active'
   
