@@ -14,6 +14,10 @@
 	    <ul class="myul">
           <li v-for="(item,i) in imgList" :key="i">
             <img v-lazy="item.img_url">
+						<div class="info">
+							<h1 class="info-title">{{ item.title }}</h1>
+							<div class="info-content">{{ item.zhaiyao }}</div>							
+						</div>
           </li>
       </ul>    
     </div>
@@ -69,12 +73,30 @@ export default {
 }
 
 .myul {
-  background-color: #000;
+  margin: 0;
+  padding: 10px;
+  li {
+    text-align: center;
+    background-color: #ccc;
+		box-shadow: 0 0 3px grey;
+    & + li {
+      margin-top: 10px;
+    }
+    img {
+      vertical-align: middle;
+      width: 100%;
+    }
+  }
   img[lazy="loading"] {
     width: 40px;
     height: 300px;
     margin: auto;
   }
+}
+
+.li {
+  list-style: none;
+  width: 100px;
 }
 </style>
 
